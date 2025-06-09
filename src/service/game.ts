@@ -1,18 +1,27 @@
-import {GameState, Move, Player,} from "../utils/types.ts";
-
+import type {GameState, Move} from "../utils/types.ts";
+import {Player, PlayerDisplay} from "../utils/types.ts";
 
 export class Game {
-    static randomCell(): CellValue {
-        return Math.floor(Math.random() * 3);
+    private static endGameMessage(winner: Player | null) {
+        return winner? `Winner is ${PlayerDisplay[winner]}` : "Game is a draw";
+    }
+    private static regularMessage(turn: Player) {
+        return `Player ${PlayerDisplay[turn]}'s turn`;
+    }
+    static gameInfo(isFinished: boolean, winner: Player | null, turn: Player): string {
+        return isFinished ? this.endGameMessage(winner) : this.regularMessage(turn);
     }
     static makeMove(state: GameState, move: Move): GameState {
-        console.log(move.player, move.index);
+        const newTurn = state.turn === Player.X? Player.O : Player.X;
+        const moveIndex = move.index;
+        const newBoard = state.board.map((cell, idx) => (idx === moveIndex ? state.turn : cell));
+        const isFinished = !newBoard.includes(Player.EMPTY);
         return {
             size: state.size,
-            board: Array.from({length: state.size * state.size}, Game.randomCell),
+            board: newBoard,
             winner: null,
-            isFinished: false,
-            turn: state.turn === Player.X? Player.O : Player.X,
+            isFinished: isFinished,
+            turn: newTurn,
         }
     }
     static initialGameState(size: number): GameState {

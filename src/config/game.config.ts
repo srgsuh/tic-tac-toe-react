@@ -1,4 +1,4 @@
 const gameConfig = {
-    size: 99,
+    size: 5,
 };
 export default gameConfig;

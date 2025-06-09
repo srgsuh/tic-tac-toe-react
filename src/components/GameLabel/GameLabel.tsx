@@ -1,11 +1,11 @@
 import React from 'react';
-import './Label.css';
+import './GameLabel.module.css';
 
-interface LabelProps {
+interface GameLabelProps {
     text: string;
 }
 
-const Label = ({text}: LabelProps) => {
+const GameLabel = ({text}: GameLabelProps) => {
     return (
         <div className="label">
             {text}
@@ -13,4 +13,4 @@ const Label = ({text}: LabelProps) => {
     );
 }
 
-export default Label;
+export default GameLabel;

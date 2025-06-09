@@ -1,6 +1,6 @@
 import './App.css'
 import TicTacToe from "./components/TicTacToe/TicTacToe";
-import config from "./config/game.config.ts";
+import config from "./config/game.config";
 
 function App() {
   return (

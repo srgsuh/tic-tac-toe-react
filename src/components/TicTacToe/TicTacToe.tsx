@@ -1,9 +1,9 @@
-import React from "react";
+import React, {useReducer} from "react";
 
 import Cell from "../Cell/Cell";
-import Label from "../Label/Label.tsx";
-import {Player} from "../../utils/types";
-//import {Game} from "../../service/game.ts";
+import GameLabel from "../GameLabel/GameLabel.tsx";
+import {Game} from "../../service/game";
+
 import "./TicTacToe.css";
 
 interface TicTacToeProps {
@@ -11,10 +11,17 @@ interface TicTacToeProps {
 }
 
 const TicTacToe = ({size}: TicTacToeProps) => {
+    const [game, dispatch] = useReducer(Game.makeMove, Game.initialGameState(size));
+    const cells = game.board.map((cell, idx) =>
+        (<Cell cellValue={cell} key = {idx} onClick={() => dispatch({index: idx})}/>)
+    );
+    const labelText = Game.gameInfo(game.isFinished, game.winner, game.turn);
     return (
-        <div className="tic-tac-toe">
-            <Label text={`Welcome to Tic-tac-toe size ${size} game`}/>
-            <Cell cellValue = {Player.X}/>
+        <div className="game-container">
+            <GameLabel text={labelText}/>
+            <div className="board">
+                {cells}
+            </div>
         </div>
     );
 }

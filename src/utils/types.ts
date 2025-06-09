@@ -1,13 +1,6 @@
-export enum Player {
-    X,
-    O,
-    EMPTY,
+export interface Move {
+    index: number;
 }
-export const PlayerDisplay = {
-    [Player.X]: 'X',
-    [Player.O]: 'O',
-    [Player.EMPTY]: '',
-};
 
 export interface GameState {
     size: number;
@@ -17,7 +10,14 @@ export interface GameState {
     turn: Player;
 }
 
-export interface Move {
-    player: Player;
-    index: number;
+export enum Player {
+    X,
+    O,
+    EMPTY,
 }
+
+export const PlayerDisplay = {
+    [Player.X]: 'X',
+    [Player.O]: 'O',
+    [Player.EMPTY]: '',
+};

@@ -1,5 +1,5 @@
 import React from "react";
-import {Player, PlayerDisplay} from "../../utils/types";
+import {Player, PlayerDisplay} from "../../utils/types.ts";
 import "./Cell.css";
 
 const CellClasses = {
@@ -10,10 +10,11 @@ const CellClasses = {
 
 interface CellProps {
     cellValue: Player;
+    onClick: React.MouseEventHandler<HTMLButtonElement>;
     isWinner?: boolean;
 }
 
-const Cell = ({cellValue, isWinner = false}: CellProps) => {
+const Cell = ({cellValue, onClick, isWinner = false}: CellProps) => {
     function getCellClass(cellValue: Player, isWinner?: boolean = false) {
         return (isWinner ? "cell cell-winner" : CellClasses[cellValue]);
     }
@@ -23,7 +24,11 @@ const Cell = ({cellValue, isWinner = false}: CellProps) => {
     }
 
     return (
-        <button disabled={isDisabled(cellValue)} className={getCellClass(cellValue, isWinner)}>
+        <button
+            disabled={isDisabled(cellValue)}
+            className={getCellClass(cellValue, isWinner)}
+            onClick={onClick}
+        >
             {PlayerDisplay[cellValue]}
         </button>
     );
