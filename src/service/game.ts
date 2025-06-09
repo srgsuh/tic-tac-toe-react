@@ -1,19 +1,9 @@
-import {CellValue, Move, GameState} from "../utils/types.ts";
-
+import {GameState, Move, Player,} from "../utils/types.ts";
 
 
 export class Game {
     static randomCell(): CellValue {
-        return ['X', 'O', ''][Math.floor(Math.random() * 3)];
-    }
-    static initialGameState(size: number): GameState {
-        return {
-          size,
-          board: new Array(size * size).fill(''),
-          winner: null,
-          isFinished: false,
-          turn: 'X',
-        };
+        return Math.floor(Math.random() * 3);
     }
     static makeMove(state: GameState, move: Move): GameState {
         console.log(move.player, move.index);
@@ -22,7 +12,16 @@ export class Game {
             board: Array.from({length: state.size * state.size}, Game.randomCell),
             winner: null,
             isFinished: false,
-            turn: state.turn === 'X' ? 'O' : 'X',
+            turn: state.turn === Player.X? Player.O : Player.X,
         }
+    }
+    static initialGameState(size: number): GameState {
+        return {
+          size,
+          board: new Array(size * size).fill(Player.EMPTY),
+          winner: null,
+          isFinished: false,
+          turn: Player.EMPTY,
+        };
     }
 }

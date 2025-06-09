@@ -1,37 +1,32 @@
-import {Component} from "react";
-import {CellValue} from "../../utils/types";
+import React from "react";
+import {Player, PlayerDisplay} from "../../utils/types";
 import "./Cell.css";
 
+const CellClasses = {
+    [Player.X]: "cell cell-x",
+    [Player.O]: "cell cell-o",
+    [Player.EMPTY]: "cell",
+}
+
 interface CellProps {
-    cellValue: CellValue;
+    cellValue: Player;
     isWinner?: boolean;
 }
 
-class Cell implements Component<CellProps> {
-    getCellClass(cellValue: CellValue, isWinner?: boolean = false) {
-        let className = 'cell';
-        if (isWinner) {
-            className += ' cell-winner';
-            return className;
-        }
-        switch (cellValue) {
-            case 'X':
-                className += ' cell-x';
-                break;
-            case "O":
-                className += ' cell-o';
-        }
-        return className;
+const Cell = ({cellValue, isWinner = false}: CellProps) => {
+    function getCellClass(cellValue: Player, isWinner?: boolean = false) {
+        return (isWinner ? "cell cell-winner" : CellClasses[cellValue]);
     }
-    getCellDisabled(cellValue: CellValue) {
-        return cellValue === 'O';
+
+    function isDisabled(cellValue: Player) {
+        return (cellValue !== Player.EMPTY);
     }
-    render() {
-        const {cellValue} = this.props;
-        return (
-            <button disabled={this.getCellDisabled(cellValue)} className={this.getCellClass(cellValue)}></button>
-        );
-    }
+
+    return (
+        <button disabled={isDisabled(cellValue)} className={getCellClass(cellValue, isWinner)}>
+            {PlayerDisplay[cellValue]}
+        </button>
+    );
 }
 
 export default Cell;

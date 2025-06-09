@@ -1,9 +1,17 @@
-export type Player = 'X' | 'O';
-export type CellValue = Player | "";
+export enum Player {
+    X,
+    O,
+    EMPTY,
+}
+export const PlayerDisplay = {
+    [Player.X]: 'X',
+    [Player.O]: 'O',
+    [Player.EMPTY]: '',
+};
 
 export interface GameState {
     size: number;
-    board: CellValue[];
+    board: Player[];
     winner: Player | null;
     isFinished: boolean;
     turn: Player;

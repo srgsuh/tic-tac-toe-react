@@ -1,18 +1,16 @@
-import React, {Component} from 'react';
+import React from 'react';
 import './Label.css';
 
 interface LabelProps {
     text: string;
 }
 
-class Label extends Component<LabelProps> {
-    render() {
-        return (
-            <div className="label">
-                {this.props.text}
-            </div>
-        );
-    }
+const Label = ({text}: LabelProps) => {
+    return (
+        <div className="label">
+            {text}
+        </div>
+    );
 }
 
 export default Label;
