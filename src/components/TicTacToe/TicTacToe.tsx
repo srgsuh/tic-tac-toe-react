@@ -1,10 +1,10 @@
-import React, {useReducer} from "react";
+import {useReducer} from "react";
 
 import Cell from "../Cell/Cell";
-import GameLabel from "../GameLabel/GameLabel.tsx";
+import GameLabel from "../GameLabel/GameLabel";
 import {Game} from "../../service/game";
 
-import "./TicTacToe.css";
+import "./TicTacToe.module.css";
 
 interface TicTacToeProps {
     size: number;

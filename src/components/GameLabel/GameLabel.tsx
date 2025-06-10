@@ -1,5 +1,4 @@
-import React from 'react';
-import './GameLabel.module.css';
+import "./GameLabel.module.css";
 
 interface GameLabelProps {
     text: string;

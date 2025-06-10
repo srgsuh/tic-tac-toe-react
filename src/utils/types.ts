@@ -10,14 +10,10 @@ export interface GameState {
     turn: Player;
 }
 
-export enum Player {
-    X,
-    O,
-    EMPTY,
-}
+export const PlayerEnum = {
+    X: "X",
+    O: "0",
+    EMPTY: " ",
+} as const satisfies Record<string, string>;
 
-export const PlayerDisplay = {
-    [Player.X]: 'X',
-    [Player.O]: 'O',
-    [Player.EMPTY]: '',
-};
+export type Player = typeof PlayerEnum[keyof typeof PlayerEnum];

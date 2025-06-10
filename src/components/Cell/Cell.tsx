@@ -1,11 +1,12 @@
 import React from "react";
-import {Player, PlayerDisplay} from "../../utils/types.ts";
+import {PlayerEnum} from "../../utils/types.ts";
+import type {Player} from "../../utils/types.ts";
 import "./Cell.css";
 
 const CellClasses = {
-    [Player.X]: "cell cell-x",
-    [Player.O]: "cell cell-o",
-    [Player.EMPTY]: "cell",
+    [PlayerEnum.X]: "cell cell-x",
+    [PlayerEnum.O]: "cell cell-o",
+    [PlayerEnum.EMPTY]: "cell",
 }
 
 interface CellProps {
@@ -15,12 +16,12 @@ interface CellProps {
 }
 
 const Cell = ({cellValue, onClick, isWinner = false}: CellProps) => {
-    function getCellClass(cellValue: Player, isWinner?: boolean = false) {
+    function getCellClass(cellValue: Player, isWinner: boolean = false) {
         return (isWinner ? "cell cell-winner" : CellClasses[cellValue]);
     }
 
     function isDisabled(cellValue: Player) {
-        return (cellValue !== Player.EMPTY);
+        return (cellValue !== PlayerEnum.EMPTY);
     }
 
     return (
@@ -29,7 +30,7 @@ const Cell = ({cellValue, onClick, isWinner = false}: CellProps) => {
             className={getCellClass(cellValue, isWinner)}
             onClick={onClick}
         >
-            {PlayerDisplay[cellValue]}
+            {cellValue}
         </button>
     );
 }
