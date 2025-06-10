@@ -12,22 +12,22 @@ const CellClasses = {
 interface CellProps {
     cellValue: Player;
     onClick: React.MouseEventHandler<HTMLButtonElement>;
-    isWinner?: boolean;
+    isFinished: boolean;
 }
 
-const Cell = ({cellValue, onClick, isWinner = false}: CellProps) => {
-    function getCellClass(cellValue: Player, isWinner: boolean = false) {
-        return (isWinner ? "cell cell-winner" : CellClasses[cellValue]);
+const Cell = ({cellValue, onClick, isFinished}: CellProps) => {
+    function getCellClass(cellValue: Player) {
+        return CellClasses[cellValue];
     }
 
-    function isDisabled(cellValue: Player) {
-        return (cellValue !== PlayerEnum.EMPTY);
+    function isDisabled(cellValue: Player, isWinner: boolean = false) {
+        return (isWinner || cellValue !== PlayerEnum.EMPTY);
     }
 
     return (
         <button
-            disabled={isDisabled(cellValue)}
-            className={getCellClass(cellValue, isWinner)}
+            disabled={isDisabled(cellValue, isFinished)}
+            className={getCellClass(cellValue)}
             onClick={onClick}
         >
             {cellValue}
